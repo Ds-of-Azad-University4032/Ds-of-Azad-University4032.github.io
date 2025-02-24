@@ -6,9 +6,11 @@
     <title>Data Structures - Dr. Eskandari - 4032</title>
     <style>
         * {
+            height: 100%;
             margin: 0;
             padding: 0;
             box-sizing: border-box !important;
+            overflow: hidden;
         }
 
         html, body {
@@ -26,11 +28,12 @@
             overflow: auto;
             height: auto;
             position: relative; /* Allows absolute positioning for the background */
+            min-height: 100vh;
         }
 
         /* Background Wrap */
         #bg-wrap {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
