@@ -295,21 +295,36 @@
 <script>
     
     function setDownloadLinks(week, homeworkLink, answerLink) {
-        const homeworkButton = document.querySelector(`#homework-pack-${week}`);
-        const answerButton = document.querySelector(`#answer-pack-${week}`);
+    const homeworkButton = document.querySelector(`#homework-pack-week${week}`);
+    const answerButton = document.querySelector(`#answer-pack-week${week}`);
 
-        if (homeworkLink) {
-            homeworkButton.className = 'active';
-            homeworkButton.onclick = function() { window.open(homeworkLink, '_blank'); };
-        }
-        if (answerLink) {
-            answerButton.className = 'active';
-            answerButton.onclick = function() { window.open(answerLink, '_blank'); };
-        }
+    if (homeworkLink) {
+        homeworkButton.className = 'active';
+        homeworkButton.onclick = function() { 
+            const a = document.createElement('a');
+            a.href = homeworkLink;
+            a.download = `HW${week}.zip`; 
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
     }
+    if (answerLink) {
+        answerButton.className = 'active';
+        answerButton.onclick = function() { 
+            const a = document.createElement('a');
+            a.href = answerLink;
+            a.download = `AnswerPack${week}.zip`; 
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+    }
+}
 
-   
-    setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/HW01.zip', null);
+// Example Usage:
+setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/HW01.zip', null);
+
 
 </script>
 
