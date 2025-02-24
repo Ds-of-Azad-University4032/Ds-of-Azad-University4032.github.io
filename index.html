@@ -13,108 +13,42 @@
 
         html, body {
             height: 100%;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background-color: #171717;
-            color: #000;
-            font-family: sans-serif;
+            background-color: black;
+            color: #00FF00;
+            font-family: monospace;
             overflow: auto;
-            height: auto;
         }
 
-        .lines {
-            position: absolute;
+        .matrix {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 100%;
-            margin: auto;
             width: 100%;
-            pointer-events: none; 
-        }
-
-        .line {
-            position: absolute;
-            width: 1px;
             height: 100%;
-            top: 0;
-            left: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            overflow: hidden;
+            z-index: -1;
+            background: black;
         }
 
-        .line::after {
-            content: "";
+        canvas {
             display: block;
-            position: absolute;
-            height: 15vh;
-            width: 100%;
-            top: -50%;
-            left: 0;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-            animation: drop 5s 0s infinite;
-            animation-fill-mode: forwards;
-            animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-        }
-
-        .line:nth-child(1) {
-            margin-left: -25%;
-        }
-
-        .line:nth-child(1)::after {
-            animation-delay: 2s;
-        }
-
-        .line:nth-child(2) {
-            margin-left: 0;
-        }
-
-        .line:nth-child(2)::after {
-            animation-delay: 2.5s;
-        }
-
-        .line:nth-child(3) {
-            margin-left: 25%;
-        }
-
-        .line:nth-child(3)::after {
-            animation-delay: 3s;
-        }
-
-        @keyframes drop {
-            0% {
-                top: -50%;
-            }
-            100% {
-                top: 110%;
-            }
         }
 
         header {
             padding: 20px;
             text-align: center;
-            background-color: #333;
-            color: #D4AF37;
+            background-color: black;
+            color: #00FF00;
             width: 100%;
+            font-size: 1.5em;
         }
 
         .instructions {
-            position: relative;
-            max-height: 200px;
-            overflow-y: hidden;
             text-align: center;
             margin: 20px auto;
             padding: 20px;
-            border: 2px solid yellow;
+            border: 2px solid #00FF00;
             width: 80%;
-            background: rgb(238,174,202);
-            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-            color: #000000; 
+            background: rgba(0, 0, 0, 0.8);
             font-size: 1.2em;
             font-weight: bold;
         }
@@ -125,17 +59,18 @@
             justify-content: center;
             margin-top: 20px;
             width: 100%;
-            overflow-x: auto; 
+            overflow-x: auto;
         }
 
         .week-box {
             margin: 10px;
             padding: 20px;
-            border: 2px solid red;
+            border: 2px solid #00FF00;
             border-radius: 5px;
             width: 200px;
             text-align: center;
-            background-color: #fff;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00FF00;
         }
 
         .week-box h3 {
@@ -143,35 +78,28 @@
         }
 
         .week-box button {
-            padding: 15px 20px;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
             margin-bottom: 10px;
+            background-color: black;
+            color: #00FF00;
+            border: 2px solid #00FF00;
         }
 
         .inactive {
-            background-color: #aaa;
-            color: white;
+            background-color: #444;
+            color: #888;
             cursor: not-allowed;
-        }
-
-        .active {
-            background-color: #4CAF50;
-            color: white;
         }
     </style>
 </head>
 <body>
-
-<div class="lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-</div>
-
+    <canvas class="matrix"></canvas>
+ 
 <header>
     <h1>Data Structures - Dr. Eskandari - 4032</h1>
 </header>
@@ -322,11 +250,38 @@
     }
 }
 
-// Example Usage:
+
 setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/HW01.zip', null);
 
-
 </script>
+    
+<script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const letters = '0123456789ABCDEF';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(0);
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters.charAt(Math.floor(Math.random() * letters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 50);
+</script
+
+
 
 </body>
 </html>
