@@ -27,21 +27,21 @@
             font-family: sans-serif;
             overflow-y: auto;
             height: auto;
-            position: relative; /* Allows absolute positioning for the background */
+            position: relative; 
             min-height: 100vh;
         }
 
-        /* Background Wrap */
+       
         #bg-wrap {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Ensure the background is behind the content */
+            z-index: -1; 
         }
 
-        /* SVG Background */
+        
         #bg-wrap svg {
             width: 100%;
             height: 100%;
@@ -241,7 +241,7 @@
     <div class="week-box" id="week1">
         <h3>Week 1</h3>
         <button class="active" id="homework-pack-week1">Homework Pack (ZIP)</button>
-        <button class="inactive" id="answer-pack-week1">Answer Pack (ZIP)</button>
+        <button class="active" id="answer-pack-week1">Answer Pack (ZIP)</button>
     </div>
 
         
@@ -374,7 +374,7 @@
 }
 
 // Example Usage:
-setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/HW01.zip', null);
+setDownloadLinks(1, 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/HW01.zip', 'https://github.com/Ds-of-Azad-University4032/weekly-homework-public/raw/refs/heads/main/AW01.zip');
 
 
 </script>
